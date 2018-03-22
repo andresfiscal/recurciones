@@ -1,52 +1,34 @@
-package recursiones;
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.InputStreamReader;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-public class recurciones{
-	
-	public static void main(String[] args) 
-	{
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		try
-		{
-			int n = Integer.parseInt(br.readLine());
-			int x = Integer.parseInt(br.readLine());
-			int result = multiplicacion(n, x);
-			bw.write("multiplicacion: " + result + "\n");
-			bw.flush();
-			
-			result = factorial(n);
-			bw.write("factorial: " + result + "\n");
-			
-			result = fibonacci(n);
-			bw.write("fibonacci: " + result + "\n");
-			
-			result = fibonacci_array(n);
-			bw.write("fibonacci_: " + result + "\n");
-			
-			bw.flush();
-		}
-		catch(Exception ex)
-		{
-			ex.printStackTrace();
-		}
-	}
+/**
+ * el ejercicio contiene las formulas para hallar la solucion de la multiplicacion, factorial, fibonacci, entre otros.
+ * @author andres felipe garcia fiscal
+ *
+ */
+public class Recurrences {
 
-	public static int multiplicacion(int n, int x) 
-	{
-		if(x == 1)
-		{
-			return n;
-		}else {
-			return n + multiplicacion(n, x-1);
-		}
-	}
 	
+	/**
+	 * esta funcion calcula el maximo comun multiplo de 2 numeros
+	 * @param a
+	 * @param b
+	 * @return el maximo comun multiplo de los 2 numeros ingresados
+	 */
+	public static int MCD_Euclides(int a, int b){
+	    while(b != 0){
+	         int t = b;
+	         b = a % b;
+	         a = t;
+	    }
+	    return a;
+	}
+	/**
+	 * esta funcion calcula el factorial de un numero
+	 * @param x
+	 * @return el factorial del numeo ingresado
+	 */
 	public static int factorial(int x)
 	{
 		if(x == 1) 
@@ -55,7 +37,11 @@ public class recurciones{
 			return x * factorial(x-1);
 		
 	}
-	
+	/**
+	 * esta funcion calcula el fibonacci de un numero
+	 * @param x
+	 * @return el numero despues de efectuar el calculo
+	 */
 	public static int fibonacci(int x)
 	{
 		if(x==0) 
@@ -66,12 +52,12 @@ public class recurciones{
 			else 
 				return fibonacci(x-1) + fibonacci(x-2);
 	}
-	
-	public static int fibonacci_array(int n)
-	{
-		int[] = serie = new int ;
-	}
-	
+	/**
+	 *  imprime el numero en una posicion de el triangulo de pascal
+	 * @param n
+	 * @param k
+	 * @return el triangulo de pascal
+	 */
 	public static int pascal(int n, int k) 
 	{
 		if(k ==0 || k == n)
@@ -79,5 +65,76 @@ public class recurciones{
 		else
 			return pascal(n-1,k-1) + pascal(n-1, k);
 	}
+	/**
+	 * imprime el triangulo de pascal
+	 * @return todo el triangulo de pascal
+	 */
+	public String print_pascal()
+	{
+		String pascal_matrix = "";
+		
+		for(int i = 0; i<10; i++)
+		{
+			for(int j =0; j <= i;j++)
+				pascal_matrix += pascal(i,j)+"\t";
+			
+			pascal_matrix += "\n";
+		}
+		return pascal_matrix;
+	}
+	/**
+	 * calcula la multiplicacion de 2 numeros
+	 * @param n
+	 * @param x
+	 * @return el resultado de la multiplicacion
+	 */
+	public static int multiplicacion(int n, int x) 
+	{
+		if(x == 1)
+		{
+			return n;
+		}else {
+			return n + multiplicacion(n, x-1);
+		}
+	}
+	
+	
+	public String inversa_cadena(String cadena)
+	{
+		
+		
+		cadena = "";
+		
+		
+		for (int i = cadena.length()-1; i>=0; i--){
+            cadena += cadena.charAt(i);
+		}    
+		return cadena;
+	}
+	
+	/**
+	 * @param args
+	 * @throws IOException 
+	 */
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		Recurrences recurrencias = new Recurrences();
+		
+		bw.write(recurrencias.factorial(15) + "\n");
+		
+		bw.write(recurrencias.fibonacci(25) + "\n");
+		
+		bw.write(recurrencias.multiplicacion(654, 97) + "\n");
+		
+		bw.write(recurrencias.MCD_Euclides(369, 1218) + "\n");
+		
+		bw.write(recurrencias.inversa_cadena("asdfghjkl") + "\n");
+		
+		bw.write(recurrencias.print_pascal());
+		bw.flush();
+	}
+	
+	
 }
 
